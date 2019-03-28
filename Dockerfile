@@ -17,6 +17,7 @@ RUN apt-get update -qqy \
     wget \
     tzdata \
     locales \
+    maven \
   && rm -rf /var/lib/apt/lists/*
 
 #========================================
