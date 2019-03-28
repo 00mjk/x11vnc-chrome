@@ -2,7 +2,7 @@
 # DESCRIPTION    
 
 # Pull base image
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 
 #========================
 # Miscellaneous packages
