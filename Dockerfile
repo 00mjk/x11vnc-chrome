@@ -11,9 +11,12 @@ FROM ubuntu:18.04
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install \
     sudo \
+    gnupg \
     ca-certificates \
     unzip \
     wget \
+    tzdata \
+    locales \
   && rm -rf /var/lib/apt/lists/*
 
 #========================================
@@ -33,6 +36,16 @@ ENV SCREEN_DEPTH 24
 ENV DISPLAY :0
 
 #===============
+# OpenJDK8
+#===============
+RUN apt-get update -qqy \
+  && apt-get install -qqy software-properties-common \
+  && add-apt-repository ppa:openjdk-r/ppa \
+  && apt-get update -qqy \
+  && apt-get -qqy install openjdk-8-jdk \
+  && rm -rf /var/lib/apt/lists/*
+
+#===============
 # Google Chrome
 #===============
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -42,18 +55,6 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     google-chrome-stable \
   && rm /etc/apt/sources.list.d/google-chrome.list \
   && rm -rf /var/lib/apt/lists/*
-
-#==================
-# Chrome webdriver
-#==================
-ENV CHROME_DRIVER_VERSION 2.13
-RUN wget --no-verbose -O /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
-  && rm -rf /opt/selenium/chromedriver \
-  && unzip /tmp/chromedriver_linux64.zip -d /opt/selenium \
-  && rm /tmp/chromedriver_linux64.zip \
-  && mv /opt/selenium/chromedriver /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION \
-  && chmod 755 /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION \
-  && ln -fs /opt/selenium/chromedriver-$CHROME_DRIVER_VERSION /usr/bin/chromedriver
 
 #=================================
 # Chrome Launch Script Modication
