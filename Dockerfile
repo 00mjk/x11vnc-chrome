@@ -2,7 +2,7 @@
 # DESCRIPTION    
 
 # Pull base image
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 #========================
 # Miscellaneous packages
@@ -10,6 +10,7 @@ FROM ubuntu:16.04
 #========================
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install \
+    sudo \
     ca-certificates \
     unzip \
     wget \
