@@ -50,28 +50,28 @@ RUN apt-get update -qqy \
 # Google Chrome
 #===============
 
-# Install latest
-# RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-#   && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
-#   && apt-get update -qqy \
-#   && apt-get -qqy install \
-#     google-chrome-stable \
-#   && rm /etc/apt/sources.list.d/google-chrome.list \
-#   && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update -qqy \
+Install latest
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+  && apt-get update -qqy \
   && apt-get -qqy install \
-    fonts-liberation \
-    libappindicator3-1 \
-    libgtk-3-0 \
-    libxss1 \
-    xdg-utils\ 
+    google-chrome-stable \
+  && rm /etc/apt/sources.list.d/google-chrome.list \
   && rm -rf /var/lib/apt/lists/*
 
-RUN wget -q http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_75.0.3770.142-1_amd64.deb \
-  && dpkg -i google-chrome-stable_75.0.3770.142-1_amd64.deb \
-  && apt-mark hold google-chrome-stable \
-  dpkg -s google-chrome-stable
+# RUN apt-get update -qqy \
+#   && apt-get -qqy install \
+#     fonts-liberation \
+#     libappindicator3-1 \
+#     libgtk-3-0 \
+#     libxss1 \
+#     xdg-utils\ 
+#   && rm -rf /var/lib/apt/lists/*
+
+# RUN wget -q http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_75.0.3770.142-1_amd64.deb \
+#   && dpkg -i google-chrome-stable_75.0.3770.142-1_amd64.deb \
+#   && apt-mark hold google-chrome-stable \
+#   dpkg -s google-chrome-stable
 
 #=================================
 # Chrome Launch Script Modication
